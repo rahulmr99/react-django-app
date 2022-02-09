@@ -1,0 +1,10 @@
+id,code,category,cost
+,1,Engineering,$0.05 
+,2,Racking,$0.12 
+,3,Monitoring,$0.01 
+,4,BOS,$0.05 
+,5,Freight All,$0.03 
+,6,Labor,$0.70 
+,7,Contingency,$0.03 
+,8,Utility,$0.17 
+,9,Fees and Other,$0.03 

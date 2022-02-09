@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  web:
+    build: ./rooftop/
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - type: bind
+        source: ./rooftop
+        target: /usr/src/rooftop/
+      # - ./rooftop/:/usr/src/rooftop/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432
+    environment:
+      - POSTGRES_USER=rooftop
+      - POSTGRES_PASSWORD=rooftop
+      - POSTGRES_DB=rooftop_db
+  frontendimage:
+    container_name: frontendimage
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /usr/src/frontend
+
+    #   - '.:/usr/src/frontend'
+    #   - '/usr/src/frontend/node_modules'
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+volumes:
+  postgres_data:

@@ -1,0 +1,12 @@
+#ignore environmet
+/rooftop-env/
+/extra/
+
+#ignore ide files
+/.idea/
+/.vscode
+
+#ignore pyc files
+*.pyc
+*/media/
+*_settings.py
